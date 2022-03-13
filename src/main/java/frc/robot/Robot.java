@@ -20,8 +20,16 @@ import frc.robot.subsystems.Collector;
 import frc.robot.autonomous.*;
 import frc.robot.IO;
 
+//gyro start
+package org.usfirst.frc.team2359.robot;
 
-
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//gyro ends
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -39,15 +47,32 @@ public class Robot extends TimedRobot {
   //This is proactive - I'm not sure we'll end up NEEDING this, but I'm guessing it will be nescessary
   public static final double DRIVE_SENSITIVITY_MULT = 1;
   
+  //Ahmads new gyro stuff starts here
+  private static final double kAngleSetpoint = 0.0;
+	private static final double kP = 0.005; // propotional turning constant
 
+	private static final int kLeftMotorPort = 0;
+	private static final int kRightMotorPort = 1;
+	private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
+	private static final int kJoystickPort = 0;
+
+	private DifferentialDrive m_myRobot
+			= new DifferentialDrive(new Spark(kLeftMotorPort),
+			new Spark(kRightMotorPort));
+	private ADXRS450_Gyro m_gyro = new ADXRS450_Gyro(kGyroPort);
+	private Joystick m_joystick = new Joystick(kJoystickPort);
+  
+  //Ahmads new gyro stuff ends here
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
   public void robotInit() {
+    //gyro start
+    m_gyro.calibrate();
+    //gyro end
     
-
     //initiate subsystems 
     drivetrain.init();
     shooter.init();
@@ -102,6 +127,10 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-
-
+    //gyro starts here
+    double turningValue = (kAngleSetpoint - m_gyro.getAngle()) * kP;
+		// Invert the direction of the turn if we are going backwards
+		turningValue = Math.copySign(turningValue, m_joystick.getY());
+		m_myRobot.arcadeDrive(m_joystick.getY(), turningValue);
+    //gyro ends here
 }
