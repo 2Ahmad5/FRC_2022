@@ -20,8 +20,10 @@ import frc.robot.subsystems.Collector;
 import frc.robot.autonomous.*;
 import frc.robot.IO;
 
-
-
+// Ahmad stuff start
+ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+double kP = 0.05;
+// Ahmad stuff end
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -47,7 +49,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     
-
+    // Ahmad stuff start
+    drivetrain.rightInvert();
+    // Ahmad stuff end
+    
+    
     //initiate subsystems 
     drivetrain.init();
     shooter.init();
@@ -70,6 +76,14 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     System.out.println("A");
       drivetrain.autoDistDrive(2.16, 0.2);
+    
+    // Ahmad stuff start
+    // Find the heading error; setpoint is 90
+    double error = 90 - gyro.getAngle();
+
+    // Turns the robot to face the desired direction
+    drive.tankDrive(kP * error, -kP * error);
+    // Ahmad stuff end
   }
 
   /** This function is called once each time the robot enters teleoperated mode. */
