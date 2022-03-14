@@ -23,6 +23,12 @@ public class Drivetrain implements Subsystem {
     Timer timer = new Timer(); //for timing autonomous functions
     private DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight); //front motors are masters & control inputs for both front and back
     
+    // Ahmad stuff start
+    public void rightInvert(){
+        frontRight.setInverted(true);
+    }
+    
+    // Ahmad stuff end        
 
     /** drive function that can be called without having to pass in private vairables **/
     public void arcadeDrive() {
