@@ -74,9 +74,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    System.out.println("A");
-      drivetrain.autoDistDrive(2.16, 0.2);
-    
+   // System.out.println("A");
+     // drivetrain.autoDistDrive(2.16, 0.2);
+   
     // Ahmad stuff start
     // Find the heading error; setpoint is 90
     double error = 90 - gyro.getAngle();
