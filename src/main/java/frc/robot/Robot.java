@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.networktables.*;
 import edu.wpi.first.wpilibj.Timer;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 //classes we make are imported here:
 import frc.robot.subsystems.Drivetrain;
