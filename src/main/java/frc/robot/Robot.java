@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
     
     // Ahmad stuff start
     drivetrain.rightInvert();
+    gyro.calibrate();
     // Ahmad stuff end
     
     
