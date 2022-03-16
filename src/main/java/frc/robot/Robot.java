@@ -12,7 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.networktables.*;
 import edu.wpi.first.wpilibj.Timer;
 
+// Ahmad stuff start here
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
+import edu.wpi.first.wpilibj.SPI;
+// Ahmad stuff end here
 
 //classes we make are imported here:
 import frc.robot.subsystems.Drivetrain;
