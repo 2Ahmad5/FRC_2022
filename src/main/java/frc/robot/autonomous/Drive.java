@@ -108,6 +108,16 @@ public class Drive{
         return (getAngle() <= angle + 10 && getAngle() >= angle - 10);
     }
 
+    public boolean DrivePID(double distance, double P) {
+        if (distanceToGoalInches < minDistance) {
+        double error = desiredDistance - threshold;
+        } else if (distanceToGoalInches > maxDistance) {
+        double error = desiredDistance + threshold;
+        }
+        go = error * P; 
+        drivetrain.driveAuto(go);  
+    }
+
     public boolean cancelTurn() {
         drivetrain.turn(0);
         integral = 0;
